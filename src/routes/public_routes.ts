@@ -10,7 +10,7 @@ import { ReviewsController } from "../controllers/reviews-controllers";
 import { ReviewImagesController } from "../controllers/reviewimages-controllers";
 import { RestaurantImageController } from "../controllers/retaurantimages-controllers";
 import { RestaurantCategoryPairingController } from "../controllers/restaurantcategoriespairing-controllers";
-
+import { ReviewUserController } from "../controllers/reviewUsers-controllers"; 
 export const publicRouter = Router();
 
 // Users
@@ -69,3 +69,10 @@ publicRouter.get("/cicipin/restaurantCategoryPairings/:id", RestaurantCategoryPa
 publicRouter.post("/cicipin/restaurantCategoryPairings", RestaurantCategoryPairingController.createRestaurantCategoryPairing);
 publicRouter.put("/cicipin/restaurantCategoryPairings/:id", RestaurantCategoryPairingController.updateRestaurantCategoryPairing);   
 publicRouter.delete("/cicipin/restaurantCategoryPairings/:id", RestaurantCategoryPairingController.deleteRestaurantCategoryPairing);
+
+// Review User
+publicRouter.get("/cicipin/reviewUsers", ReviewUserController.getReviewUsers);
+publicRouter.get("/cicipin/reviewUsers/:id", ReviewUserController.getReviewUserById);
+publicRouter.post("/cicipin/reviewUsers", ReviewUserController.createReviewUser);
+publicRouter.put("/cicipin/reviewUsers/:id", ReviewUserController.updateReviewUser);   
+publicRouter.delete("/cicipin/reviewUsers/:id", ReviewUserController.deleteReviewUser);
