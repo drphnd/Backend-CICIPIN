@@ -1,5 +1,6 @@
 import { Users } from "@prisma/client";
 import { RestaurantsList } from "./restaurants-model-response";
+import e from "express";
 
 export interface createUser{
     name: string;
@@ -55,7 +56,6 @@ export interface getUserRestaurants{
     name: string;
     restaurants: RestaurantsList[];
 }
-
 
 export interface updateUser{
     id: number;

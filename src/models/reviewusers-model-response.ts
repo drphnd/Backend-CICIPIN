@@ -13,8 +13,7 @@ export interface requestReviewUser{
 export interface responseReviewUser{
     id: number;
     ReviewsID: number;
-    UsersID: number;
-    reviewUsers: ReviewUsers[];
+    UsersID: number
 }
 
 export function toReviewUserResponse(reviewUsers: ReviewUsers){
@@ -25,13 +24,22 @@ export function toReviewUserResponse(reviewUsers: ReviewUsers){
     }
 }
 
+export function toUpdateReviewUserResponse(reviewUsers: ReviewUsers){
+    return {
+        id: reviewUsers.id,
+        ReviewsID: reviewUsers.ReviewsID,
+        UsersID: reviewUsers.UsersID,
+    }
+}
 
 export interface updateReviewUser{
+    id: number;
     ReviewsID: number;
     UsersID: number;
 }
 
 export interface deleteReviewUser{
+    id: number;
     ReviewsID: number;
     UsersID: number;
 }
