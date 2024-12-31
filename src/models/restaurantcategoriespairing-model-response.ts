@@ -14,7 +14,6 @@ export interface responseRestaurantCategoryPairing{
     id: number;
     restaurantID: number;
     RestaurantCategoriesID: number;
-    restaurantCategories: RestaurantCategories;
 }
 
 export function toRestaurantCategoryPairingResponse(restaurantCategoriesPairings: RestaurantCategoriesPairings){
@@ -27,11 +26,13 @@ export function toRestaurantCategoryPairingResponse(restaurantCategoriesPairings
 
 
 export interface updateRestaurantCategoryPairing{
+    id: number;
     restaurantID: number;
     RestaurantCategoriesID: number;
 }
 
 export interface deleteRestaurantCategoryPairing{
+    id: number;
     restaurantID: number;
     RestaurantCategoriesID: number;
 }

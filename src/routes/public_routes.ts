@@ -9,6 +9,7 @@ import { RestaurantCategoryController } from "../controllers/restaurantcategorie
 import { ReviewsController } from "../controllers/reviews-controllers";
 import { ReviewImagesController } from "../controllers/reviewimages-controllers";
 import { RestaurantImageController } from "../controllers/retaurantimages-controllers";
+import { RestaurantCategoryPairingController } from "../controllers/restaurantcategoriespairing-controllers";
 
 export const publicRouter = Router();
 
@@ -61,3 +62,10 @@ publicRouter.get("/cicipin/restaurantImages/:id", RestaurantImageController.getR
 publicRouter.post("/cicipin/restaurantImages", RestaurantImageController.createRestaurantImage);
 publicRouter.put("/cicipin/restaurantImages/:id", RestaurantImageController.updateRestaurantImage);   
 publicRouter.delete("/cicipin/restaurantImages/:id", RestaurantImageController.deleteRestaurantImage);
+
+// Restaurant Category Pairings
+publicRouter.get("/cicipin/restaurantCategoryPairings", RestaurantCategoryPairingController.getAllRestaurantCategoryPairings);
+publicRouter.get("/cicipin/restaurantCategoryPairings/:id", RestaurantCategoryPairingController.getRestaurantCategoryPairingById);
+publicRouter.post("/cicipin/restaurantCategoryPairings", RestaurantCategoryPairingController.createRestaurantCategoryPairing);
+publicRouter.put("/cicipin/restaurantCategoryPairings/:id", RestaurantCategoryPairingController.updateRestaurantCategoryPairing);   
+publicRouter.delete("/cicipin/restaurantCategoryPairings/:id", RestaurantCategoryPairingController.deleteRestaurantCategoryPairing);
