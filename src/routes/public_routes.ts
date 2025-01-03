@@ -11,6 +11,8 @@ import { ReviewImagesController } from "../controllers/reviewimages-controllers"
 import { RestaurantImageController } from "../controllers/retaurantimages-controllers";
 import { RestaurantCategoryPairingController } from "../controllers/restaurantcategoriespairing-controllers";
 import { ReviewUserController } from "../controllers/reviewUsers-controllers"; 
+import { MenuController } from "../controllers/menus-controller";
+import { BookmarkController } from "../controllers/bookmarks-controller";
 export const publicRouter = Router();
 
 // Users
@@ -78,3 +80,16 @@ publicRouter.get("/cicipin/reviewUsers/:id", ReviewUserController.getReviewUserB
 publicRouter.post("/cicipin/reviewUsers", ReviewUserController.createReviewUser);
 publicRouter.put("/cicipin/reviewUsers/:id", ReviewUserController.updateReviewUser);   
 publicRouter.delete("/cicipin/reviewUsers/:id", ReviewUserController.deleteReviewUser);
+
+// Menus
+publicRouter.get("/cicipin/menus", MenuController.getAllMenus);
+publicRouter.get("/cicipin/menus/:id", MenuController.getMenuById);
+publicRouter.post("/cicipin/menus", MenuController.createMenu);
+publicRouter.put("/cicipin/menus/:id", MenuController.updateMenu);
+publicRouter.delete("/cicipin/menus/:id", MenuController.deleteMenu);
+
+//Bookmark
+publicRouter.post("/cicipin/bookmarks", BookmarkController.create);
+publicRouter.get("/cicipin/bookmarks/:id", BookmarkController.getById);
+publicRouter.put("/cicipin/bookmarks/:id", BookmarkController.update);
+publicRouter.delete("/cicipin/bookmarks/:id", BookmarkController.delete);

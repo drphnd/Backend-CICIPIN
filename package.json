@@ -5,24 +5,31 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "node dist/main.js"
+    "start": "node dist/main.js",
+    "dev": "nodemon --watch src --exec ts-node src/main.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.1.0",
     "backend-cicipin": "file:",
     "bcrypt": "^5.1.1",
-    "express": "^4.21.1",
+    "express": "^4.21.2",
     "tsc": "^2.0.4",
     "uuid": "^11.0.3",
     "winston": "^3.17.0",
-    "zod": "^3.23.8"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.0",
-    "@types/node": "^22.10.1",
-    "nodemon": "^3.1.7",
+    "@types/node": "^22.10.5",
+    "@types/uuid": "^10.0.0",
+    "nodemon": "^3.1.9",
     "prisma": "^6.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
-  }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

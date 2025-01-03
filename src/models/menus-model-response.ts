@@ -5,6 +5,7 @@ export interface createMenu{
     image: string;
     description: string;
     price: string;
+    RestaurantsID: number;
 }
 
 export interface requestMenu{
@@ -12,6 +13,7 @@ export interface requestMenu{
     image: string;
     description: string;
     price: string;
+    RestaurantsID: number;
 }
 
 export interface responseMenu{
@@ -36,15 +38,19 @@ export function toMenuResponse(menus: Menus){
 
 
 export interface updateMenu{
+    id: any;
     name: string;
     image: string;
     description: string;
     price: string;
+    RestaurantsID: number;
 }
 
 export interface deleteMenu{
+    id: any;
     name: string;
     image: string;
     description: string;
     price: string;
+    RestaurantsID: number;
 }

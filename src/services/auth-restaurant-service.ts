@@ -17,7 +17,7 @@ import { ReviewsList } from "../models/reviews-model-response";
 export class RestaurantService {
   static async getAllRestaurants(
     restaurants: Restaurants
-): Promise<string> {
+  ): Promise<string> {
     const getAllRestaurants = await prismaClient.restaurants.findMany({
       where: {
         id: restaurants.id,
@@ -28,7 +28,7 @@ export class RestaurantService {
 
   static async getRestaurantById(
     restaurants: Restaurants
-): Promise<string> {
+  ): Promise<string> {
     const getRestaurantById = await prismaClient.restaurants.findUnique({
       where: {
         id: restaurants.id,
@@ -96,7 +96,7 @@ export class RestaurantService {
   }
 
 
-static async deleteRestaurant(deleteRestaurant: deleteRestaurant): Promise<string> {
+  static async deleteRestaurant(deleteRestaurant: deleteRestaurant): Promise<string> {
     const deleteRestaurantById = await prismaClient.restaurants.delete({
       where: {
         id: deleteRestaurant.id,
