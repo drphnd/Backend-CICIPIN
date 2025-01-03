@@ -1,56 +1,65 @@
-import { Request, Response } from "express";
 import { Bookmarks } from "@prisma/client";
-import { bookmarksValidation } from "../validations/bookmarks-service";
-import { createBookmark, responseBookmark, requestBookmark, updateBookmark, toBookmarkResponse } from "../models/bookmarks-model-response";
-import { Validation } from "../validations/validation";
+import {
+    createBookmark,
+    requestBookmark,
+    responseBookmark,
+    updateBookmark,
+    toBookmarkResponse,
+} from "../models/bookmarks-model-response"; // Adjust the path as needed
 import { prismaClient } from "../application/database";
 
-
 export class BookmarkService {
-    // Create a new bookmark
-    static async createBookmark(data: createBookmark, userId: number, restaurantId: number): Promise<responseBookmark> {
-        const bookmark = await prismaClient.bookmarks.create({
+    static async createBookmark(requestBookmark: requestBookmark): Promise<responseBookmark> {
+        const newBookmark = await prismaClient.bookmarks.create({
             data: {
-                isBookmarked: data.isBookmarked,
-                UsersID: userId,
-                RestaurantsID: restaurantId
-            }
-        });
-        return toBookmarkResponse(bookmark);
-    }
-
-    // Fetch a specific bookmark
-    static async getBookmarkById(bookmarkId: number): Promise<responseBookmark | null> {
-        const bookmark = await prismaClient.bookmarks.findUnique({
-            where: { id: bookmarkId }
+                isBookmarked: requestBookmark.isBookmarked,
+                UsersID: requestBookmark.UsersID,
+                RestaurantsID: requestBookmark.RestaurantsID,
+            },
         });
 
-        if (!bookmark) return null;
-        return toBookmarkResponse(bookmark);
+        return toBookmarkResponse(newBookmark);
     }
 
-    // Update bookmark
-    static async updateBookmark(data: updateBookmark): Promise<responseBookmark | null> {
-        const bookmark = await prismaClient.bookmarks.update({
-            where: { id: data.id },
-            data: {
-                isBookmarked: data.isBookmarked
-            }
+    static async getAllBookmarks(body: any): Promise<responseBookmark[]> {
+        const bookmarks = await prismaClient.bookmarks.findMany();
+        return bookmarks.map(toBookmarkResponse);
+    }
+
+    static async getBookmarkById(bookmark: Bookmarks): Promise<responseBookmark | null> {
+        const foundBookmark = await prismaClient.bookmarks.findUnique({
+            where: {
+                id: bookmark.id,
+            },
         });
 
-        if (!bookmark) return null;
-        return toBookmarkResponse(bookmark);
-    }
-
-    // Delete bookmark
-    static async deleteBookmark(bookmarkId: number): Promise<boolean> {
-        try {
-            await prismaClient.bookmarks.delete({
-                where: { id: bookmarkId }
-            });
-            return true;
-        } catch (error) {
-            return false;
+        if (!foundBookmark) {
+            throw new Error("Bookmark not found");
         }
+
+        return toBookmarkResponse(foundBookmark);
+    }
+
+    static async updateBookmark(updateBookmark: updateBookmark): Promise<responseBookmark> {
+        const updatedBookmark = await prismaClient.bookmarks.update({
+            where: {
+                id: updateBookmark.id,
+            },
+            data: {
+                isBookmarked: updateBookmark.isBookmarked,
+            },
+        });
+
+        return toBookmarkResponse(updatedBookmark);
+    }
+
+    static async deleteBookmark(deleteBookmark: { id: number }): Promise<string> {
+        await prismaClient.bookmarks.delete({
+            where: {
+                id: deleteBookmark.id,
+            },
+        });
+
+        return "Bookmark deleted successfully";
     }
 }

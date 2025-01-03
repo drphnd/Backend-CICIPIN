@@ -1,70 +1,55 @@
+// bookmarkController.ts
 import { Request, Response } from "express";
-import { BookmarkService } from "../services/auth-bookmarks-service";
+import { BookmarkService } from "../services/auth-bookmarks-service"; // Adjust the path based on your project structure
 
 export class BookmarkController {
-    // Create a new bookmark
-    static async create(req: Request, res: Response): Promise<void> {
-        const { isBookmarked, userId, restaurantId } = req.body; // Extract userId from body
-
-        if (!userId || !restaurantId) {
-            res.status(400).json({ error: "userId and restaurantId are required." });
-            return;
-        }
-
+    static async createBookmark(req: Request, res: Response): Promise<void> {
         try {
-            const bookmark = await BookmarkService.createBookmark({ isBookmarked }, userId, restaurantId);
+            const bookmark = await BookmarkService.createBookmark(req.body);
             res.status(201).json(bookmark);
         } catch (error) {
-            res.status(500).json({ error: "Failed to create bookmark" });
+            console.error(error);
+            res.status(400).json({ message: "Failed to create bookmark", error });
         }
     }
 
-    // Get bookmark by ID
-    static async getById(req: Request, res: Response): Promise<void> {
-        const { id } = req.params;
-
+    static async getAllBookmarks(req: Request, res: Response): Promise<void> {
         try {
-            const bookmark = await BookmarkService.getBookmarkById(Number(id));
-            if (!bookmark) {
-                res.status(404).json({ error: "Bookmark not found" });
-            } else {
-                res.status(200).json(bookmark);
-            }
+            const bookmarks = await BookmarkService.getAllBookmarks(req.body);
+            res.status(200).json(bookmarks);
         } catch (error) {
-            res.status(500).json({ error: "Failed to fetch bookmark" });
+            console.error(error);
+            res.status(500).json({ message: "Failed to fetch bookmarks", error });
         }
     }
 
-    // Update bookmark
-    static async update(req: Request, res: Response): Promise<void> {
-        const { id } = req.params;
-        const { isBookmarked } = req.body;
-
+    static async getBookmarkById(req: Request, res: Response): Promise<void> {
         try {
-            const updatedBookmark = await BookmarkService.updateBookmark({ id: Number(id), isBookmarked });
-            if (!updatedBookmark) {
-                res.status(404).json({ error: "Bookmark not found" });
-            } else {
-                res.status(200).json(updatedBookmark);
-            }
+            const bookmark = await BookmarkService.getBookmarkById(req.body);
+            res.status(200).json(bookmark);
         } catch (error) {
-            res.status(500).json({ error: "Failed to update bookmark" });
+            console.error(error);
+            res.status(404).json({ message: "Bookmark not found", error });
         }
     }
 
-    // Delete bookmark
-    static async delete(req: Request, res: Response): Promise<void> {
-        const { id } = req.params;
-
+    static async updateBookmark(req: Request, res: Response): Promise<void> {
         try {
-            const success = await BookmarkService.deleteBookmark(Number(id));
-            if (!success) {
-                res.status(404).json({ error: "Bookmark not found" });
-            } else {
-                res.status(200).json({ message: "Bookmark deleted successfully" });
-            }
+            const bookmark = await BookmarkService.updateBookmark(req.body);
+            res.status(200).json(bookmark);
         } catch (error) {
-            res.status(500).json({ error: "Failed to delete bookmark" });
+            console.error(error);
+            res.status(400).json({ message: "Failed to update bookmark", error });
+        }
+    }
+
+    static async deleteBookmark(req: Request, res: Response): Promise<void> {
+        try {
+            const bookmark = await BookmarkService.deleteBookmark(req.body);
+            res.status(200).json(bookmark);
+        } catch (error) {
+            console.error(error);
+            res.status(400).json({ message: "Failed to delete bookmark", error });
         }
     }
 }
