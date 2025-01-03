@@ -15,9 +15,11 @@ model Users {
   password        String
   email           String        @unique
   profile_picture String
+  token           String?
   bookmarks       Bookmarks[]
   restaurants     Restaurants[]
   reviewUsers     ReviewUsers[]
+  @@map("users")
 }
 
 model Restaurants {

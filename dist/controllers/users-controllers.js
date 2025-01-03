@@ -24,13 +24,45 @@ class UsersController {
             res.status(200).json(users);
         });
     }
-    static createUser(req, res) {
+    static register(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const users = req.body;
-            const response = yield auth_user_service_1.UserService.createUser(users);
-            res.status(201).json({
-                data: response
-            });
+            try {
+                const request = req.body;
+                const response = yield auth_user_service_1.UserService.register(request);
+                res.status(201).json({
+                    data: response
+                });
+            }
+            catch (error) {
+                next(error);
+            }
+        });
+    }
+    static login(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const request = req.body;
+                const response = yield auth_user_service_1.UserService.login(request);
+                res.status(200).json({
+                    data: response
+                });
+            }
+            catch (error) {
+                next(error);
+            }
+        });
+    }
+    static logout(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const response = yield auth_user_service_1.UserService.logout(req.Users);
+                res.status(200).json({
+                    data: response
+                });
+            }
+            catch (error) {
+                next(error);
+            }
         });
     }
     static updateUser(req, res) {

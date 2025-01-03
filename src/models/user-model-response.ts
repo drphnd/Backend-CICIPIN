@@ -22,7 +22,7 @@ export interface requestUser{
 
 
 export interface responseUser{
-    id: number;
+    token?: string;
     name: string;
     username: string;
     email: string;
@@ -30,13 +30,19 @@ export interface responseUser{
     role: string;
 }
 
-export function toUserResponse(users: Users){
+export interface loginRequest{
+    username: string;
+    password: string;
+}
+
+export function toUserResponse(users: Users): responseUser{
     return {
         name: users.name,
         username: users.username,
         email: users.email,
         profile_picture: users.profile_picture,
-        role: users.role
+        role: users.role,
+        token: users.token ??""
     }
 }
 

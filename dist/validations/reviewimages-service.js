@@ -6,7 +6,8 @@ class reviewimagesValidation {
 }
 exports.reviewimagesValidation = reviewimagesValidation;
 reviewimagesValidation.CREATE = zod_1.z.object({
-    image: zod_1.z.string().min(1).max(100)
+    image: zod_1.z.string().min(1).max(100),
+    reviewID: zod_1.z.number().positive()
 });
 reviewimagesValidation.UPDATE = zod_1.z.object({
     image: zod_1.z.string().min(1).max(100)

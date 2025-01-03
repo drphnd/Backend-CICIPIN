@@ -1,7 +1,10 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { UserService } from "../services/auth-user-service";
-import { createUser, requestUser, responseUser, updateUser, deleteUser } from "../models/user-model-response";
+import { createUser, requestUser, responseUser, updateUser, deleteUser, loginRequest } from "../models/user-model-response";
 import { request } from "http";
+import { UserRequest } from "../types/user-request";
+
+
 
 export class UsersController {
     static async getAllUsers(req: Request, res: Response) {
@@ -14,12 +17,39 @@ export class UsersController {
         res.status(200).json(users);
     }
 
-    static async createUser(req: Request, res: Response) {
-        const users : requestUser = req.body as requestUser;
-        const response = await UserService.createUser(users);
-        res.status(201).json({
-            data: response
-        })
+    static async register(req: Request, res: Response, next: NextFunction) {
+        try{
+            const request: requestUser = req.body as requestUser;
+            const response = await UserService.register(request);
+            res.status(201).json({
+                data: response
+            })
+        }catch(error){
+            next(error);
+        }
+    }
+
+    static async login(req: Request, res: Response, next: NextFunction) {
+        try{
+            const request: loginRequest = req.body as loginRequest;
+            const response = await UserService.login(request);
+            res.status(200).json({
+                data: response
+            })
+        }catch(error){
+            next(error);
+        }
+    }
+
+    static async logout(req: UserRequest, res: Response, next: NextFunction) {
+        try{
+            const response = await UserService.logout(req.Users!);
+            res.status(200).json({
+                data: response
+            })
+        }catch(error){
+            next(error);
+        }
     }
 
     static async updateUser(req: Request, res: Response) {

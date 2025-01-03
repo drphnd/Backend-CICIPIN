@@ -16,7 +16,9 @@ export const publicRouter = Router();
 // Users
 publicRouter.get("/cicipin/users", UsersController.getAllUsers);
 publicRouter.get("/cicipin/users/:id", UsersController.getUserById);
-publicRouter.post("/cicipin/users", UsersController.createUser);
+publicRouter.post("/cicipin/users/register", UsersController.register);
+publicRouter.post("/cicipin/users/login", UsersController.login);
+publicRouter.post("/cicipin/users/logout", UsersController.logout);
 publicRouter.put("/cicipin/users/:id", UsersController.updateUser);
 publicRouter.delete("/cicipin/users/:id", UsersController.deleteUser);
 publicRouter.get("/cicipin/users/usersRestaurants/:id", UsersController.getUserRestaurants);
