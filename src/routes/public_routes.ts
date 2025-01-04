@@ -13,6 +13,7 @@ import { RestaurantCategoryPairingController } from "../controllers/restaurantca
 import { ReviewUserController } from "../controllers/reviewUsers-controllers"; 
 import { MenuController } from "../controllers/menus-controller";
 import { BookmarkController } from "../controllers/bookmarks-controller";
+import { MenuCategoryPairingController } from "../controllers/menucategoriespairings-controllers";
 export const publicRouter = Router();
 
 // Users
@@ -93,3 +94,10 @@ publicRouter.post("/cicipin/bookmarks", BookmarkController.createBookmark);
 publicRouter.get("/cicipin/bookmarks/:id", BookmarkController.getBookmarkById);
 publicRouter.put("/cicipin/bookmarks/:id", BookmarkController.updateBookmark);
 publicRouter.delete("/cicipin/bookmarks/:id", BookmarkController.deleteBookmark);
+
+//Menu Categories Pairings
+publicRouter.get("/cicipin/menuCategoryPairings", MenuCategoryPairingController.getAllMenuCategoryPairings);
+publicRouter.get("/cicipin/menuCategoryPairings/:id", MenuCategoryPairingController.getMenuCategoryPairingsbyId);
+publicRouter.post("/cicipin/menuCategoryPairings", MenuCategoryPairingController.createMenuCategoryPairing);
+publicRouter.put("/cicipin/menuCategoryPairings/:id", MenuCategoryPairingController.updateMenuCategoryPairing);
+publicRouter.delete("/cicipin/menuCategoryPairings/:id", MenuCategoryPairingController.deleteMenuCategoryPairing);
