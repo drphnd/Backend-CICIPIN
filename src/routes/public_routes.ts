@@ -91,6 +91,7 @@ publicRouter.delete("/cicipin/menus/:id", MenuController.deleteMenu);
 
 //Bookmark
 publicRouter.post("/cicipin/bookmarks", BookmarkController.createBookmark);
+publicRouter.get("/cicipin/bookmarks", BookmarkController.getAllBookmarks);
 publicRouter.get("/cicipin/bookmarks/:id", BookmarkController.getBookmarkById);
 publicRouter.put("/cicipin/bookmarks/:id", BookmarkController.updateBookmark);
 publicRouter.delete("/cicipin/bookmarks/:id", BookmarkController.deleteBookmark);
