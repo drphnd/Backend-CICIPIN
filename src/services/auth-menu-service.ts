@@ -28,6 +28,20 @@ export class MenuService {
         }
         return toMenuResponse(foundMenu);
     }
+    
+    static async getMenusByRestaurantId(
+        restaurantId: number
+    ): Promise<responseMenu[]> {
+        // Fetch menus where the RestaurantsID matches the given restaurantId
+        const menus = await prismaClient.menus.findMany({
+            where: {
+                RestaurantsID: restaurantId,
+            },
+        });
+    
+        // Map the result to the response model
+        return menus.map(toMenuResponse);
+    }
 
     static async createMenu(requestMenu: requestMenu): Promise<responseMenu> {
         // Validate the request

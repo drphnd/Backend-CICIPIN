@@ -85,6 +85,7 @@ publicRouter.delete("/cicipin/reviewUsers/:id", ReviewUserController.deleteRevie
 // Menus
 publicRouter.get("/cicipin/menus", MenuController.getAllMenus);
 publicRouter.get("/cicipin/menus/:id", MenuController.getMenuById);
+publicRouter.get("/cicipin/menus/restaurant/:restaurantId", MenuController.getMenusByRestaurantId); // New Route
 publicRouter.post("/cicipin/menus", MenuController.createMenu);
 publicRouter.put("/cicipin/menus/:id", MenuController.updateMenu);
 publicRouter.delete("/cicipin/menus/:id", MenuController.deleteMenu);
