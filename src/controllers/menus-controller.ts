@@ -12,6 +12,23 @@ export class MenuController {
         res.status(200).json(menu);
     }
 
+    static async getMenusByRestaurantId(req: Request, res: Response): Promise<void> {
+        try {
+            const restaurantId = parseInt(req.params.restaurantId, 10);
+            if (isNaN(restaurantId)) {
+                res.status(400).json({ message: "Invalid restaurant ID" });
+                return;
+            }
+    
+            const menus = await MenuService.getMenusByRestaurantId(restaurantId);
+            res.status(200).json(menus);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Failed to fetch menus by restaurant ID"});
+        }
+    }
+    
+
     static async createMenu(req: Request, res: Response) {
         try {
             const menu = await MenuService.createMenu(req.body); // Pass req.body to the service

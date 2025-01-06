@@ -2,9 +2,9 @@ import { Bookmarks } from "@prisma/client";
 import e from "express";
 
 export interface createBookmark{
-    isBookmarked: boolean;
-    UsersID: number;
-    RestaurantsID: number;
+        isBookmarked: boolean;
+        UsersID: number;
+        RestaurantsID: number;
 }
 
 export interface requestBookmark{

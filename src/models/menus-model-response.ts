@@ -1,11 +1,11 @@
 import { Menus } from "@prisma/client";
 
 export interface createMenu{
-    name: string;
-    image: string;
-    description: string;
-    price: string;
-    RestaurantsID: number;
+        name: string;
+        image: string;
+        description: string;
+        price: string;
+        RestaurantsID: number;
 }
 
 export interface requestMenu{
@@ -15,7 +15,7 @@ export interface requestMenu{
     price: string;
     RestaurantsID: number;
 }
-
+    
 export interface responseMenu{
     id: number;
     name: string;

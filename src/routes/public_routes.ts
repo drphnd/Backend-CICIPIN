@@ -85,12 +85,14 @@ publicRouter.delete("/cicipin/reviewUsers/:id", ReviewUserController.deleteRevie
 // Menus
 publicRouter.get("/cicipin/menus", MenuController.getAllMenus);
 publicRouter.get("/cicipin/menus/:id", MenuController.getMenuById);
+publicRouter.get("/cicipin/menus/restaurant/:restaurantId", MenuController.getMenusByRestaurantId); // New Route
 publicRouter.post("/cicipin/menus", MenuController.createMenu);
 publicRouter.put("/cicipin/menus/:id", MenuController.updateMenu);
 publicRouter.delete("/cicipin/menus/:id", MenuController.deleteMenu);
 
 //Bookmark
 publicRouter.post("/cicipin/bookmarks", BookmarkController.createBookmark);
+publicRouter.get("/cicipin/bookmarks", BookmarkController.getAllBookmarks);
 publicRouter.get("/cicipin/bookmarks/:id", BookmarkController.getBookmarkById);
 publicRouter.put("/cicipin/bookmarks/:id", BookmarkController.updateBookmark);
 publicRouter.delete("/cicipin/bookmarks/:id", BookmarkController.deleteBookmark);
