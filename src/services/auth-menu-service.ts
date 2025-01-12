@@ -17,16 +17,28 @@ export class MenuService {
         return menus.map(toMenuResponse);
     }
 
-    static async getMenuById(menu: Menus): Promise<responseMenu | null> {
-        const foundMenu = await prismaClient.menus.findUnique({
-            where: {
-                id: menu.id,
-            },
-        });
-        if (!foundMenu) {
-            throw new Error("Menu not found");
+    static async getMenuById(menuId: number): Promise<responseMenu | null> {
+        try {
+            if (menuId === undefined || menuId === null) {
+                throw new Error('Menu ID must be provided');
+            }
+
+            const menu = await prismaClient.menus.findUnique({
+                where: {
+                  id: menuId,  // Make sure menuId is the correct ID passed in the URL
+                }
+              });
+              
+
+            if (menu) {
+                return toMenuResponse(menu);
+            } else {
+                throw new Error('Menu not found');
+            }
+        } catch (error) {
+            console.error('Error fetching menu by ID:', error);
+            throw error; // Re-throw the error after logging
         }
-        return toMenuResponse(foundMenu);
     }
     
     static async getMenusByRestaurantId(

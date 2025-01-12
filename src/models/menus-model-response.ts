@@ -1,22 +1,14 @@
 import { Menus } from "@prisma/client";
 
-export interface createMenu{
-        name: string;
-        image: string;
-        description: string;
-        price: string;
-        RestaurantsID: number;
-}
-
-export interface requestMenu{
+export interface createMenu {
     name: string;
     image: string;
     description: string;
     price: string;
     RestaurantsID: number;
 }
-    
-export interface responseMenu{
+
+export interface requestMenu {
     id: number;
     name: string;
     image: string;
@@ -25,7 +17,16 @@ export interface responseMenu{
     RestaurantsID: number;
 }
 
-export function toMenuResponse(menus: Menus){
+export interface responseMenu {
+    id: number;
+    name: string;
+    image: string;
+    description: string;
+    price: string;
+    RestaurantsID: number;
+}
+
+export function toMenuResponse(menus: Menus): responseMenu {
     return {
         id: menus.id,
         name: menus.name,
@@ -37,8 +38,8 @@ export function toMenuResponse(menus: Menus){
 }
 
 
-export interface updateMenu{
-    id: any;
+export interface updateMenu {
+    id: number;
     name: string;
     image: string;
     description: string;
@@ -46,8 +47,8 @@ export interface updateMenu{
     RestaurantsID: number;
 }
 
-export interface deleteMenu{
-    id: any;
+export interface deleteMenu {
+    id: number;
     name: string;
     image: string;
     description: string;

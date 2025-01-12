@@ -32,6 +32,7 @@ export interface responseRestaurant{
 
 export function toRestaurantResponse(restaurants: Restaurants){
     return {
+        id: restaurants.id,
         name: restaurants.name,
         address: restaurants.address,
         longtitude: restaurants.longtitude,
@@ -39,6 +40,21 @@ export function toRestaurantResponse(restaurants: Restaurants){
         description: restaurants.description
     }
 }
+
+export function toRestaurantResponseList(restaurants: Restaurants[]){
+    const result = restaurants.map(restaurant => {
+        return {
+            id: restaurant.id,
+            name: restaurant.name,
+            address: restaurant.address,
+            longtitude: restaurant.longtitude,
+            latitude: restaurant.latitude,
+            description: restaurant.description
+        }
+    })
+    return result;
+}
+
 
 export function toUpdateRestaurantResponse(restaurants: Restaurants) {
     return {

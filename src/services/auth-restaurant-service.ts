@@ -4,37 +4,38 @@ import {
   requestRestaurant,
   responseRestaurant,
   createRestaurant,
-  toRestaurantResponse,
   deleteRestaurant,
   updateRestaurant,
   toUpdateRestaurantResponse,
   getRestaurantReviews,
+  toRestaurantResponseList
 } from "../models/restaurants-model-response";
 import { Validation } from "../validations/validation";
 import { prismaClient } from "../application/database";
 import { ReviewsList } from "../models/reviews-model-response";
+import { ResponseError } from "../errors/response-error";
 
 export class RestaurantService {
   static async getAllRestaurants(
     restaurants: Restaurants
-  ): Promise<string> {
-    const getAllRestaurants = await prismaClient.restaurants.findMany({
-      where: {
-        id: restaurants.id,
-      },
-    });
-    return "Get Data was successful!";
+  ): Promise<responseRestaurant[]> {
+    const getAllRestaurants = await prismaClient.restaurants.findMany();
+    return toRestaurantResponseList(getAllRestaurants);
   }
 
   static async getRestaurantById(
     restaurants: Restaurants
-  ): Promise<string> {
+  ): Promise<Restaurants> {
     const getRestaurantById = await prismaClient.restaurants.findUnique({
       where: {
         id: restaurants.id,
-      },
-    });
-    return "getRestaurantById";
+      }
+    })
+    if (!getRestaurantById) {
+      throw new ResponseError(400, "Restaurant not found");
+  }
+  
+    return getRestaurantById
   }
 
   static async createRestaurant(
@@ -53,7 +54,7 @@ export class RestaurantService {
         longtitude: validateRequest.longtitude,
         latitude: validateRequest.latitude,
         description: validateRequest.description,
-        UsersID: validateRequest.UsersID,
+        UsersID: validateRequest.UsersID
       },
     });
     return "Data Create Successfully";
@@ -83,7 +84,7 @@ export class RestaurantService {
       },
     });
 
-    // Assuming `Users` is fetched elsewhere and available here
+    // Assuming Users is fetched elsewhere and available here
     const user = await prismaClient.users.findUnique({
       where: { id: UpdateRestaurant.userID },
     });
@@ -107,6 +108,5 @@ export class RestaurantService {
 
   // BUAT RESTO BISA MENGAMBIL DATA REVIEW HANYA DIRESTO TERTENTU SAJA
 
+  
 }
-
-
